@@ -14,10 +14,10 @@ const Password = require("./dbpassword");
 //init HZWf0k8lhSFZGzsx
 const PORT = 3000;
 const app = express();
-const DB =
-  `mongodb+srv://tester:${Password}@server.uugwpn8.mongodb.net/?retryWrites=true&w=majority`;
+const DB = `mongodb+srv://tester:${Password}@server.uugwpn8.mongodb.net/?retryWrites=true&w=majority`;
 
 //middleware
+app.use(express.json());
 app.use(authRouter);
 
 //connections

@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 const authRouter = require("./routes/auth");
 const Password = require("./dbpassword");
 
-//init HZWf0k8lhSFZGzsx
+//init
 const PORT = 3000;
 const app = express();
 const DB = `mongodb+srv://tester:${Password}@server.uugwpn8.mongodb.net/?retryWrites=true&w=majority`;

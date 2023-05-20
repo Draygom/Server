@@ -1,3 +1,3 @@
 # Server
 
-A server for testing projectis
+A server for testing projects

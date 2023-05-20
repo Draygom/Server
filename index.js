@@ -9,12 +9,13 @@ const mongoose = require("mongoose");
 
 //imports from other files
 const authRouter = require("./routes/auth");
+const Password = require("./dbpassword");
 
 //init HZWf0k8lhSFZGzsx
 const PORT = 3000;
 const app = express();
 const DB =
-  "mongodb+srv://tester:HZWf0k8lhSFZGzsx@server.uugwpn8.mongodb.net/?retryWrites=true&w=majority";
+  `mongodb+srv://tester:${Password}@server.uugwpn8.mongodb.net/?retryWrites=true&w=majority`;
 
 //middleware
 app.use(authRouter);

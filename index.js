@@ -8,7 +8,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 //imports from other files
-const authRouter = require("./routes/auth");
+const authRouter = require("./routes/auth_route");
 const dbAccess = require("./dbpassword");
 
 //init

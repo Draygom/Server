@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const auth = async (req, res, next) => {
   try {
-    const token = res.header("x-auth-token");
+    const token = req.header("x-auth-token");
     if (!token)
       return res.status(401).json({ message: "No auth token, access denied" });
 
@@ -15,8 +15,8 @@ const auth = async (req, res, next) => {
     req.user = isVerified.id;
     req.token = token;
     next();
-  } catch (error) {
-    res.status(500).json({ error: err.message });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
   }
 };
 

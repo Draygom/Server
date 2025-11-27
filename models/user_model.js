@@ -1,36 +1,34 @@
-const mongoose = require("mongoose");
+const database = require("../infra/database.js");
 
-const userSchema = mongoose.Schema({
-  name: {
-    require: true,
-    type: String,
+const User = {
+  async create(user) {
+    const { name, email, password, address, type } = user;
+    const result = await database.query({
+      text: `
+        INSERT INTO users (name, email, password, address, type)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *;
+      `,
+      values: [name, email, password, address || "", type || "user"],
+    });
+    return result.rows[0];
   },
-  email: {
-    require: true,
-    type: String,
-    trim: true,
-    validate: {
-      validator: (value) => {
-        const re =
-          /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-        return value.match(re);
-      },
-      message: "Insira um email válido",
-    },
-  },
-  password: {
-    require: true,
-    type: String,
-  },
-  adress: {
-    type: String,
-    default: "",
-  },
-  type: {
-    type: String,
-    default: "user",
-  },
-});
 
-const User = mongoose.model("User", userSchema);
+  async findByEmail(email) {
+    const result = await database.query({
+      text: "SELECT * FROM users WHERE email = $1;",
+      values: [email],
+    });
+    return result.rows[0];
+  },
+
+  async findById(id) {
+    const result = await database.query({
+      text: "SELECT * FROM users WHERE id = $1;",
+      values: [id],
+    });
+    return result.rows[0];
+  },
+};
+
 module.exports = User;
